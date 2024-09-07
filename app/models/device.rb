@@ -1,6 +1,14 @@
 class Device < ApplicationRecord
   belongs_to :restaurant
   has_many :device_updates
+  after_update_commit -> {
+    broadcast_replace_to(
+      :restaurants,
+      target: "restaurant_#{self.restaurant_id}",
+      partial: "restaurants/restaurant",
+      locals: { restaurant: self.restaurant }
+      )
+  }
 
   enum status: {
     working: 0,

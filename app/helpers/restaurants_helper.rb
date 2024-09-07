@@ -1,12 +1,12 @@
 module RestaurantsHelper
   def status_name(status)
     case status
-    when "operational"
+    when :operational
       "Operacional"
-    when "warning"
+    when :warning
       "Advertencia"
-    when "Problemas"
-      "Problems"
+    when :problems
+      "Problemas"
     else
       status.capitalize.to_s
     end
