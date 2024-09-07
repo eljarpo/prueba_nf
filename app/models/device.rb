@@ -8,6 +8,12 @@ class Device < ApplicationRecord
       partial: "restaurants/restaurant",
       locals: { restaurant: self.restaurant }
       )
+      broadcast_replace_to(
+        :restaurants,
+        target: "device_#{self.id}",
+        partial: "devices/device",
+        locals: { device: self }
+        )
   }
 
   enum status: {

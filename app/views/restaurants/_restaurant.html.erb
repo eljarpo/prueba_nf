@@ -1,40 +1,42 @@
 
 <div id="<%= dom_id(restaurant) %>" class="border p-2 rounded hover:bg-gray-100">
-    <p class="text-xl"><%= restaurant.name %>
-        <% case restaurant.status %>
-        <% when :warning %>
-            <% badge_class = 'float-right inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-400/20' %>
-        <% when :problems %>
-            <% badge_class = 'float-right inline-flex items-center rounded-md bg-red-400/10 px-2 py-1 text-xs font-medium text-red-400 ring-1 ring-inset ring-red-400/20' %>
-        <% when :operational %>
-            <% badge_class = 'float-right inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-400/20' %>
-        <% end %>
-        <span class="<%= badge_class %>"><%= status_name(restaurant.status) %></span>
-     </p>
-
-    <br />
-    <% restaurant.devices_type_status.sort.each do |dt| %>
-        
-        <%= device_type_name(dt.first) %>
-
-        <div class="flex flex-items">
-            <% dt.last.each do |status| %>
-                <% color = 'fill-blue-400' %>
-                <% case status.first %>
-                <% when 'working' %>
-                    <% color = 'fill-green-600' %>
-                <% when 'broken' %>
-                    <% color = 'fill-red-400' %>
-                <% when 'maintenance' %>
-                    <% color = 'fill-yellow-400' %>
-
-                <% end %>
-                <% status.last.times do |d| %>
-                    <svg class="m-1 h-1.5 w-1.5 <%= color %>" viewBox="0 0 6 6" aria-hidden="true">
-                        <circle cx="3" cy="3" r="3" />
-                    </svg>
-                <% end %>
+    <%= link_to restaurant, data: { turbo: false } do %>
+        <p class="text-xl"><%= restaurant.name %>
+            <% case restaurant.status %>
+            <% when :warning %>
+                <% badge_class = 'float-right inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-400 ring-1 ring-inset ring-yellow-400/20' %>
+            <% when :problems %>
+                <% badge_class = 'float-right inline-flex items-center rounded-md bg-red-400/10 px-2 py-1 text-xs font-medium text-red-400 ring-1 ring-inset ring-red-400/20' %>
+            <% when :operational %>
+                <% badge_class = 'float-right inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-400/20' %>
             <% end %>
-        </div>
+            <span class="<%= badge_class %>"><%= status_name(restaurant.status) %></span>
+        </p>
+
+        <br />
+        <% restaurant.devices_type_status.sort.each do |dt| %>
+            
+            <%= device_type_name(dt.first) %>
+
+            <div class="flex flex-items">
+                <% dt.last.each do |status| %>
+                    <% color = 'fill-blue-400' %>
+                    <% case status.first %>
+                    <% when 'working' %>
+                        <% color = 'fill-green-600' %>
+                    <% when 'broken' %>
+                        <% color = 'fill-red-400' %>
+                    <% when 'maintenance' %>
+                        <% color = 'fill-yellow-400' %>
+
+                    <% end %>
+                    <% status.last.times do |d| %>
+                        <svg class="m-1 h-1.5 w-1.5 <%= color %>" viewBox="0 0 6 6" aria-hidden="true">
+                            <circle cx="3" cy="3" r="3" />
+                        </svg>
+                    <% end %>
+                <% end %>
+            </div>
+        <% end %>
     <% end %>
 </div>
