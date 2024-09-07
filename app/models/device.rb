@@ -8,7 +8,7 @@ class Device < ApplicationRecord
     maintenance: 2
   }
 
-  enum type: {
+  enum device_type: {
     printer: 0,
     pos: 1,
     monitor: 2,
