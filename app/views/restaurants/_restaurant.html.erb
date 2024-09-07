@@ -1,0 +1,29 @@
+
+<div class="border p-2 rounded hover:bg-gray-100">
+    <%= restaurant.name %> <%= status_name(restaurant.status) %>
+    <br />
+    <% restaurant.devices_type_status.each do |dt| %>
+        <%= device_type_name(dt.first) %>
+
+        <div class="flex flex-items">
+        <% dt.last.each do |status| %>
+            <% color = 'fill-blue-400' %>
+            <% case status.first %>
+            <% when 'working' %>
+                <% color = 'fill-green-600' %>
+            <% when 'broken' %>
+                <% color = 'fill-red-400' %>
+            <% when 'maintenance' %>
+                <% color = 'fill-yellow-400' %>
+
+            <% end %>
+            <% status.last.times do |d| %>
+                <svg class="m-1 h-1.5 w-1.5 <%= color %>" viewBox="0 0 6 6" aria-hidden="true">
+                    <circle cx="3" cy="3" r="3" />
+                </svg>
+            <% end %>
+        <% end %>
+        </div>
+        
+    <% end %>
+</div>
