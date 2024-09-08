@@ -17,12 +17,13 @@ Cada restaurante tiene un estado segun la cantidad de dispositivos funcionando:
     - Problemas: El restaurante tiene el total de algun tipo de dispositivo en mantencion o dañados.
 
 Y cada dispositivo tiene 3 estados posibles: Funcionando (verde), en mantencion (amarillo) y dañado (rojo).
-Para actualizar el estado de cada dispositivo se debe hacer una peticion tipo POST a la API en la direccion http:localhost:3000/api/v1/devices enviando como parametros su identificador y estado:
+Para actualizar el estado de cada dispositivo se debe hacer una peticion tipo POST a la API en la direccion http:localhost:3000/api/v1/devices enviando como parametros su identificador, estado y un mensaje opcional:
 ```
 {
     device: {
         id: integer,
-        status: string
+        status: string,
+        message(optional): string,
     }
 }
 ```
@@ -40,7 +41,7 @@ En primera instancia todos los dispositivos estaran en funcionamiento.
 
 ### Endpoints
 
- ### api/v1/devices?id=**{id}**&status=**{status}**
+ ### api/v1/devices?id=**{id}**&status=**{status}**&message=**{status}**
  Recibe el estado de un dispositivo y crea un registro en la base de datos
 
  Parametros:
@@ -49,6 +50,7 @@ En primera instancia todos los dispositivos estaran en funcionamiento.
 | -------- | ------- |
 | id(integer)  | Identificador del dispositivo (ej: 1)   |
 | status(string) | Estado del dispositivo (working, maintenance, broken)     |
+| message(string) | Mensaje para que quede registrado en el centro de monitoreo     |
 
 
 ## Uso
