@@ -12,7 +12,7 @@
     <% end %>
     <%= link_to device, data: { turbo: false } do %>
         <div class="<%= device_class %>">
-            <%= device_status_name(device.status) %>
+            <%= device.name %>
             <%= device.device_updates.last.created_at.strftime("%d/%m/%Y %H:%M") %>
         </div>
     <% end %>

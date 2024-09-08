@@ -1,10 +1,10 @@
-<%= turbo_stream_from(:restaurants) %>
+<%= turbo_stream_from(:devices) %>
 <div class="container mx-auto pb-4">
     <div class="max-w-5xl mx-auto bg-tertiary shadow-md p-8 mt-2 rounded">
         <h1 class="text-2xl"><%= @restaurant.name %></h1>
-        <%= turbo_frame_tag "restaurants", class: "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 m-2 gap-2" do %>
+        <%= turbo_frame_tag "devices", class: "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 m-2 gap-2" do %>
             <% @restaurant.devices.order(:device_type).each do |device| %>
-                <%= render device %>
+                <%= render partial: 'restaurants/device', locals: { device: device } %>
             <% end %>
         <% end %>
     </div>

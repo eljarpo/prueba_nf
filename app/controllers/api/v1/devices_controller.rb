@@ -3,18 +3,18 @@ module Api
     class DevicesController < ApiController
       skip_forgery_protection only: [ :create ]
       def create
-        device = Device.find_by(id: params[:device][:device_id])
+        device = Device.find_by(id: params[:device][:id])
         if device.nil?
           render json: { message: "No existe ese dispositivo!" }
         else
-          if params[:status] == "maintenance" && device.status != "maintenance"
+          if params[:device][:status] == "maintenance" && device.status != "maintenance"
             DeviceUpdate.create(device_id: device.id, message: "Entro a mantenimeinto")
-          elsif params[:status] == "working" && device.status != "working"
+          elsif params[:device][:status] == "working" && device.status != "working"
             DeviceUpdate.create(device_id: device.id, message: "Ha sido reparado")
-          elsif params[:status] == "broken" && device.status != "broken"
+          elsif params[:device][:status] == "broken" && device.status != "broken"
             DeviceUpdate.create(device_id: device.id, message: "Ha fallado")
           end
-          if device.update(device_params)
+          if device.update!(device_params)
             render json: { message: "#{device.name} actualizado a #{device.status}" }
           else
             render json: { message: "Error al actualizar el dispositivo" }
