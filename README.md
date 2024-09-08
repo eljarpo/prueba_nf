@@ -5,6 +5,9 @@
 Ruby 3.1.2
 
 Rails 7.2.1
+PostgreSQL 14.2
+Node 21.4.0
+
 
 ### Descripcion
 Aplicacion para monitorear el estado de dispositivos utilizados en cada restaurante, en su pagina de inicio se ve un listado de restaurantes, con un detalle del estado de cada dispositivo asociado a este.
@@ -36,12 +39,12 @@ La aplicacion se cargara automaticamente con 3 restaurantes y 16 dispositivos cr
 - Impresora  (4)
 - Sistema de red  (1)
 
-En primera instancia todos los dispositivos estaran en funcionamiento.
+En primera instancia todos los dispositivos estaran en funcionamiento (estado: working).
 
 
 ### Endpoints
 
- ### api/v1/devices?id=**{id}**&status=**{status}**&message=**{status}**
+ ### api/v1/devices?id=**{id}**&status=**{estado}**&message=**{mensaje}**
  Recibe el estado de un dispositivo y crea un registro en la base de datos
 
  Parametros:
@@ -50,7 +53,7 @@ En primera instancia todos los dispositivos estaran en funcionamiento.
 | -------- | ------- |
 | id(integer)  | Identificador del dispositivo (ej: 1)   |
 | status(string) | Estado del dispositivo (working, maintenance, broken)     |
-| message(string) | Mensaje para que quede registrado en el centro de monitoreo     |
+| message(string) | (opcional) Mensaje para que quede registrado en el centro de monitoreo     |
 
 
 ## Uso
@@ -74,6 +77,7 @@ bin/rails db:seed
 Instalar dependencias
 ```
 bundle install
+npm install
 ```
 
 Arrancar la aplicacion
