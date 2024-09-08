@@ -36,16 +36,14 @@ class Device < ApplicationRecord
     computer: 4
   }
 
-  def check_status(device_params, message = nil)
+  def create_device_update(device_params, message = nil)
     if device_params[:status] == "maintenance"
       message = message.nil? ? "Entro a mantenimeinto" : message
-      DeviceUpdate.create(device_id: self.id, message: message)
     elsif device_params[:status] == "working"
       message = message.nil? ? "Esta funcionando" : message
-      DeviceUpdate.create(device_id: self.id, message: message)
     elsif device_params[:status] == "broken"
       message = message.nil? ? "No esta funcionando" : message
-      DeviceUpdate.create(device_id: self.id, message: message)
     end
+    DeviceUpdate.create(device_id: self.id, message: message)
   end
 end

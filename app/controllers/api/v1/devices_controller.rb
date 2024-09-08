@@ -7,8 +7,8 @@ module Api
         if device.nil?
           render json: { message: "No existe ese dispositivo!" }
         else
-          device.check_status(device_params, params[:device][:message])
           if device.update!(device_params)
+            device.create_device_update(device_params, params[:message])
             render json: { message: "#{device.name} actualizado a #{device.status}" }
           else
             render json: { message: "Error al actualizar el dispositivo" }
