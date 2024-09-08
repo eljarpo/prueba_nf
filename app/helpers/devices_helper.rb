@@ -4,8 +4,8 @@ module DevicesHelper
     when "working"
       "Operacional"
     when "maintenance"
-      "En mantenimiento"
-    when :broken
+      "Mantenimiento"
+    when "broken"
       "Dañado"
     else
       status.capitalize.to_s

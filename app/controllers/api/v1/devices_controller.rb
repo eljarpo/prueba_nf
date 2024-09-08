@@ -7,13 +7,7 @@ module Api
         if device.nil?
           render json: { message: "No existe ese dispositivo!" }
         else
-          if params[:device][:status] == "maintenance" && device.status != "maintenance"
-            DeviceUpdate.create(device_id: device.id, message: "Entro a mantenimeinto")
-          elsif params[:device][:status] == "working" && device.status != "working"
-            DeviceUpdate.create(device_id: device.id, message: "Ha sido reparado")
-          elsif params[:device][:status] == "broken" && device.status != "broken"
-            DeviceUpdate.create(device_id: device.id, message: "Ha fallado")
-          end
+          device.check_status(device_params, params[:device][:message])
           if device.update!(device_params)
             render json: { message: "#{device.name} actualizado a #{device.status}" }
           else
