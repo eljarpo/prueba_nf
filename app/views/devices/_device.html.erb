@@ -10,10 +10,8 @@
         <% device_class = 'border p-2 bg-yellow-200 border-yellow-800 hover:bg-yellow-400' %>
 
     <% end %>
-    <%= link_to device, data: { turbo: false } do %>
-        <div class="<%= device_class %>">
-            <span class="text-lg"><%= device_status_name(device.status) %></span>
-            <span class="text-sm"><%= device.device_updates.last.created_at.strftime("%d/%m/%Y %H:%M") %></span>
-        </div>
-    <% end %>
+    <div class="<%= device_class %>">
+        <span class="text-lg"><%= device_status_name(device.status) %></span>
+        <span class="text-sm"><%= device.device_updates.last.created_at.strftime("%d/%m/%Y %H:%M") %></span>
+    </div>
 </div>
