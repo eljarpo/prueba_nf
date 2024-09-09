@@ -105,14 +105,14 @@ rake simulator:run
 ```
 
 
-Con este comando puedes simular el funcionamiento de un restaurant en especifico
+Con este comando puedes simular el funcionamiento de un restaurant en especifico, cambia 1 por el id del restaurante.
 ```
-rake simulator:restaurant <id>
+rake 'simulator:restaurant[1]'
 ```
 
 
-Con este comando puedes simular el funcionamiento de un dispositivo en especifico
+Con este comando puedes simular el funcionamiento de un dispositivo en especifico, cambia '1' por el id del dispositivo.
 ```
-rake simulator:device <id>
+rake 'simulator:device[1]'
 ```
 
