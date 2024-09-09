@@ -12,10 +12,13 @@
             <% end %>
             <span class="<%= badge_class %>"><%= status_name(restaurant.status) %></span>
         </p>
+        <div class="text-sm text-gray-400">
+        <%= restaurant.last_device_update_date.strftime("%d/%m/%Y %H:%M") %>
+        </div>
+            
 
         <br />
         <% restaurant.devices_type_status.sort.each do |dt| %>
-            
             <%= device_type_name(dt.first) %>
 
             <div class="flex flex-items">

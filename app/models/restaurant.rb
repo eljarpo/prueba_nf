@@ -1,5 +1,6 @@
 class Restaurant < ApplicationRecord
   has_many :devices
+  has_many :device_updates, through: :devices
   validates :name, presence: true
 
   # enum status: {
@@ -34,5 +35,9 @@ class Restaurant < ApplicationRecord
       devices_by_status[device.device_type][device.status] += 1
     end
     devices_by_status
+  end
+
+  def last_device_update_date
+    device_updates.last.created_at
   end
 end

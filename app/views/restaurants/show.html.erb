@@ -1,10 +1,15 @@
 <%= turbo_stream_from(:devices) %>
 <div class="container mx-auto pb-4">
     <div class="max-w-5xl mx-auto bg-tertiary shadow-md p-8 mt-2 rounded">
-        <div class="text-2xl"><%= link_to 'Monitor', root_path %> > <%= @restaurant.name %></div>
-        <%= turbo_frame_tag "devices", class: "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 m-2 gap-2" do %>
-            <% @restaurant.devices.order(:device_type).each do |device| %>
-                <%= render partial: 'restaurants/device', locals: { device: device } %>
+        <div class="text-2xl"><%= link_to 'Monitor', root_path %> > <%= @restaurant.name %> <%= render partial: 'restaurants/last_update_date', locals: { date: @restaurant.last_device_update_date } %> </div>
+        <%= turbo_frame_tag "devices", class: "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 m-2 gap-2 " do %>
+            <% @restaurant.devices.device_types.keys.each do |device_type_key| %>
+                <% @restaurant.devices.order(:name).where(device_type: device_type_key).each do |device| %>
+                    <%= render partial: 'restaurants/device', locals: { device: device } %>
+                <% end %>
+                <div class="col-span-2 md:col-span-4 lg:col-span-6">
+                
+                </div>
             <% end %>
         <% end %>
     </div>
