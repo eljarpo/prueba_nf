@@ -41,6 +41,7 @@ Atributos:
 
 Metodos:
 - create_device_update: Crea un registro de la actualizacion de un dispositivo incluyendo el mensaje recibido
+- validate_status: valida que el estado recibido exista.
 
 ##### DeviceUpdate
 Atributos:
