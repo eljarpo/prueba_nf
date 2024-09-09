@@ -5,7 +5,7 @@ class DeviceUpdate < ApplicationRecord
   after_create -> {
     broadcast_prepend_to(
       :device,
-      target: "device_updates",
+      target: "device_#{self.device_id}_updates",
       partial: "devices/device_update",
       locals: { device_update: self }
       )

@@ -9,8 +9,8 @@
 
     <div class="max-w-5xl mx-auto bg-tertiary shadow-md p-8 mt-2 rounded">
         <h1 class="text-2xl">Ultimas actualizaciones</h1>
-        <ul id="device_updates">
-        <%= turbo_frame_tag "device_updates" do %>
+        <ul id="device_<%= @device.id %>_updates">
+        <%= turbo_frame_tag "device_#{@device.id}_updates" do %>
             <% @device.device_updates.order(created_at: :desc).first(20).each do |du| %>
                 <%= render partial: 'devices/device_update', locals: { device_update: du } %>
             <% end %>
