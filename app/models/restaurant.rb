@@ -38,6 +38,6 @@ class Restaurant < ApplicationRecord
   end
 
   def last_device_update_date
-    device_updates.last.created_at
+    device_updates.last&.created_at
   end
 end

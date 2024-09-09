@@ -13,7 +13,7 @@
             <span class="<%= badge_class %>"><%= status_name(restaurant.status) %></span>
         </p>
         <div class="text-sm text-gray-400">
-        <%= restaurant.last_device_update_date.strftime("%d/%m/%Y %H:%M") %>
+        <%= restaurant.last_device_update_date&.strftime("%d/%m/%Y %H:%M") %>
         </div>
             
 

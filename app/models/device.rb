@@ -21,20 +21,8 @@ class Device < ApplicationRecord
       locals: { device: self }
     )
   }
-
-  enum status: {
-    working: 0,
-    broken: 1,
-    maintenance: 2
-  }
-
-  enum device_type: {
-    printer: 0,
-    pos: 1,
-    monitor: 2,
-    network: 3,
-    computer: 4
-  }
+  enum :status, [ :working, :broken, :maintenance ]
+  enum :device_type, [ :printer, :pos, :monitor, :network, :computer ]
 
   def create_device_update(device_params, message = nil)
     if device_params[:status] == "maintenance"
@@ -45,5 +33,10 @@ class Device < ApplicationRecord
       message = message.nil? ? "No esta funcionando" : message
     end
     DeviceUpdate.create(device_id: self.id, message: message)
+  end
+
+  def self.validate_status(params)
+    status = params[:status]
+    Device.statuses.keys.include?(status)
   end
 end
