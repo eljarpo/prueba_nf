@@ -3,7 +3,12 @@ module Api
     class DevicesController < ApiController
       skip_forgery_protection only: [ :create ]
       def create
-        device = Device.find_by(id: params[:device][:id])
+        if params[:device].present?
+          device_id = params[:device][:id]
+        else
+          device_id = nil
+        end
+        device = Device.find_by(id: device_id.to_i)
         if device.nil?
           render json: { message: "No existe ese dispositivo!" }
         else
