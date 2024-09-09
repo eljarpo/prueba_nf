@@ -1,12 +1,59 @@
-# Prueba API Monitor
+# API Monitor
+
+## Documentacion
+Aplicacion web que monitorea el estado de los dispositivos usados en cada restaurante, esta aplicacion recibe el estado de los dispositivos y actualiza su estado de forma automatica mediante el uso de websockets, la informacion es guardada en una base de datos SQL.
+
+### Solucion
+
+#### Diagrama de BD
+![class_diagram](./doc/images/db_diagram.png)
+
+#### Diagrama de flujo
+![class_diagram](./doc/images/flow_diagram.png)
+![class_diagram](./doc/images/flow_chart.png)
+
+#### Clases
+![class_diagram](./doc/images/class_diagram.png)
+
+##### Restaurant
+Atributos:
+- id: Identificador del restaurante.
+- name: Nombre del restaurante
+
+Metodos:
+- devices_type_status: Devuelve un diccionario del estado de cada dispositivo agrupado por su tipo.
+- last_device_update_date: Devuelve la fecha de la ultima actualizacion a un dispositivo.
+- status: Calcula el estado del restaruante
+
+    - Operativo: El restaurante tiene todos sus dispositivos funcionando
+
+    - Advertencia: El restaurante tiene algunos dispositivos en mantencion o fuera de funcionamiento.
+
+    - Problemas: El restaurante tiene el total de algun tipo de dispositivo en mantencion o dañados.
+
+##### Device
+Atributos:
+- id: Identificador del dispositivo.
+- restaurant_id: Identificador del restaurante.
+- name: Nombre del dispositivo
+- device_type: Tipo del dispositivo (printer, pos, monitor, network, computer)
+- status: Estado del dispositivo (working, maintanance, broken)
+
+Metodos:
+- create_device_update: Crea un registro de la actualizacion de un dispositivo incluyendo el mensaje recibido
+
+##### DeviceUpdate
+Atributos:
+- id: Identificador del registro.
+- device_id: Identificador del dispositivo.
+- message: Mensaje correspondiente a la actualizacion
 
 ## Aplicacion
 ### Versiones
-Ruby 3.1.2
-
-Rails 7.2.1
-PostgreSQL 14.2
-Node 21.4.0
+- Ruby 3.1.2
+- Rails 7.2.1
+- PostgreSQL 14.2
+- Node 21.4.0
 
 
 ### Descripcion
@@ -20,7 +67,7 @@ Cada restaurante tiene un estado segun la cantidad de dispositivos funcionando:
     - Problemas: El restaurante tiene el total de algun tipo de dispositivo en mantencion o dañados.
 
 Y cada dispositivo tiene 3 estados posibles: Funcionando (verde), en mantencion (amarillo) y dañado (rojo).
-Para actualizar el estado de cada dispositivo se debe hacer una peticion tipo POST a la API en la direccion http:localhost:3000/api/v1/devices enviando como parametros su identificador, estado y un mensaje opcional:
+Para actualizar el estado de cada dispositivo se debe hacer una peticion tipo ```POST``` a la API en la direccion ```api/v1/devices``` enviando como parametros su identificador, estado y un mensaje opcional:
 ```
 {
     device: {
@@ -32,7 +79,7 @@ Para actualizar el estado de cada dispositivo se debe hacer una peticion tipo PO
 ```
 Al recibir el cambio de estado, se creara un registro del cambio de estado y la aplicacion actualizara el estado del restaurante y dispositivo automaticamente y se podra ver un detalle de cada actualizacion del dispositvo.
 
-La aplicacion se cargara automaticamente con 3 restaurantes y 16 dispositivos creados para cada uno. Cada dispositivo pertenece a una categoria preestablecida, estas podran ser:
+La aplicacion se cargara automaticamente con 3 restaurantes y 17 dispositivos creados para cada uno. Cada dispositivo pertenece a una categoria preestablecida, estas podran ser:
 - POS (4)
 - Computador  (4)
 - Monitor  (4)
@@ -44,28 +91,50 @@ En primera instancia todos los dispositivos estaran en funcionamiento (estado: w
 
 ### Endpoints
 
-### GET http://localhost:3000
-![home](./home_screen.png)
+### GET /
+### GET restaurants
+![home](./doc/images/home_screen.png)
+
 Vista de los restaurantes mostrando un detalle del estado de sus dispositivos, esta se actualiza automaticamente despues de cada actualizacion del dispositivo.
 
-### GET http://localhost:3000/restaurants/:id
-![restaurant](./restaurant_screen.png)
+### GET restaurants/:id
+![restaurant](./doc/images/restaurant_screen.png)
+
 Vista del restaurante mostrando cada dispositivo, su estado y la fecha de la ultima actualizacion, esta se actualiza automaticamente despues de cada actualizacion del dispositivo.
 
-### GET http://localhost:3000/devices/:id
-![restaurant](./device_screen.png)
+### GET devices/:id
+![restaurant](./doc/images/device_screen.png)
+
 Vista del dispositivo mostrando un listado de sus ultimas actualizaciones y su fecha correspondiente, esta se actualiza automaticamente despues de cada actualizacion del dispositivo.
 
-### POST http://localhost:3000/api/v1/devices
+### POST api/v1/devices
  Recibe el estado de un dispositivo y crea un registro en la base de datos
 
- Parametros:
+ejemplo:
+```
+{
+    device: {
+        id: integer,
+        status: string,
+        message(optional): string,
+    }
+}
+```
+
+ #### Parametros
 
 | Parametro    | Valor |
 | -------- | ------- |
 | id(integer)  | Identificador del dispositivo (ej: 1)   |
 | status(string) | Estado del dispositivo (working, maintenance, broken)     |
 | message(string) | (opcional) Mensaje para que quede registrado en el centro de monitoreo     |
+
+#### Respuesta
+La respuesta corresponde a un mensaje explicativo de lo que ocurrio con la peticion, hay 3 opciones: se actualizo el dispositivo correctamente, hubo un error y no se pudo actualizar el dispositivo o no se encuentra el dispositivo, ejemplo:
+
+```
+{ message: "No existe ese dispositivo!" }
+```
 
 
 ## Uso
