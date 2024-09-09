@@ -7,8 +7,6 @@ namespace :simulator do
       run_simulation(nil, nil)
   end
 
-
-
   task :restaurant, [ :restaurant_id ] => [ :environment ] do |t, args|
     restaurant = Restaurant.find_by(id: args[:restaurant_id])
     puts "Simulador de restaurantes!"
@@ -58,7 +56,8 @@ namespace :simulator do
             status: status
           },
           message: message
-        } })
+        }
+      })
 
       puts response.body
       puts "Request ##{idx} sent"

@@ -44,7 +44,19 @@ En primera instancia todos los dispositivos estaran en funcionamiento (estado: w
 
 ### Endpoints
 
- ### api/v1/devices?id=**{id}**&status=**{estado}**&message=**{mensaje}**
+### GET http://localhost:3000
+![home](./home_screen.png)
+Vista de los restaurantes mostrando un detalle del estado de sus dispositivos, esta se actualiza automaticamente despues de cada actualizacion del dispositivo.
+
+### GET http://localhost:3000/restaurants/:id
+![restaurant](./restaurant_screen.png)
+Vista del restaurante mostrando cada dispositivo, su estado y la fecha de la ultima actualizacion, esta se actualiza automaticamente despues de cada actualizacion del dispositivo.
+
+### GET http://localhost:3000/devices/:id
+![restaurant](./device_screen.png)
+Vista del dispositivo mostrando un listado de sus ultimas actualizaciones y su fecha correspondiente, esta se actualiza automaticamente despues de cada actualizacion del dispositivo.
+
+### POST http://localhost:3000/api/v1/devices
  Recibe el estado de un dispositivo y crea un registro en la base de datos
 
  Parametros:
