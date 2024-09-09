@@ -29,7 +29,7 @@ class Restaurant < ApplicationRecord
 
   def devices_type_status
     devices_by_status = Hash.new
-    devices.each do |device|
+    devices.order(:id).each do |device|
       devices_by_status[device.device_type] = Hash.new if devices_by_status[device.device_type].nil?
       devices_by_status[device.device_type][device.status] = 0 if devices_by_status[device.device_type][device.status].nil?
       devices_by_status[device.device_type][device.status] += 1
