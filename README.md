@@ -50,12 +50,6 @@ Atributos:
 - message: Mensaje correspondiente a la actualizacion
 
 ## Aplicacion
-### Versiones
-- Ruby 3.1.2
-- Rails 7.2.1
-- PostgreSQL 14.2
-- Node 21.4.0
-
 
 ### Descripcion
 Aplicacion para monitorear el estado de dispositivos utilizados en cada restaurante, en su pagina de inicio se ve un listado de restaurantes, con un detalle del estado de cada dispositivo asociado a este.
@@ -139,6 +133,14 @@ La respuesta corresponde a un mensaje explicativo de lo que ocurrio con la petic
 
 
 ## Uso
+
+### Versiones
+- Ruby 3.1.2
+- Rails 7.2.1
+- PostgreSQL 14.2
+- Node 21.4.0
+- Yarn 1.22.15
+  
 ### API para monitorear dispositivos
 Clonar repositorio
 ```
@@ -153,7 +155,7 @@ cd prueba_nf
 Instalar dependencias
 ```
 bundle install
-npm install
+yarn install
 ```
 
 Crear, migrar y cargar la base de datos
@@ -161,6 +163,12 @@ Crear, migrar y cargar la base de datos
 bin/rails db:create
 bin/rails db:migrate
 bin/rails db:seed
+```
+
+En case de error
+```
+sudo su - postgres
+createuser -s -r <usuario>
 ```
 
 Arrancar la aplicacion
