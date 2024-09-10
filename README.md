@@ -165,7 +165,7 @@ bin/rails db:migrate
 bin/rails db:seed
 ```
 
-En case de error
+(**opcional**) En case de que el rol no este creado
 ```
 sudo su - postgres
 createuser -s -r <usuario>
