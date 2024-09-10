@@ -14,6 +14,8 @@ module Api
         else
           if Device.validate_status(device_params) && device.update!(device_params)
             device.create_device_update(device_params, params[:message])
+            # TODO SIDEKIQ JOB
+            # DeviceUpdateJob.perform_later(device_params, params[:message])
             render json: { message: "#{device.name} actualizado a #{device.status}" }
           else
             render json: { message: "Error al actualizar el dispositivo" }

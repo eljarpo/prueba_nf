@@ -142,12 +142,18 @@ La respuesta corresponde a un mensaje explicativo de lo que ocurrio con la petic
 ### API para monitorear dispositivos
 Clonar repositorio
 ```
-git clone git@test.com
+git clone git@github.com:eljarpo/prueba_nf.git
 ```
 
 ingresar al directorio de la aplicacion clonada
 ```
-cd api_monitor
+cd prueba_nf
+```
+
+Instalar dependencias
+```
+bundle install
+npm install
 ```
 
 Crear, migrar y cargar la base de datos
@@ -155,11 +161,6 @@ Crear, migrar y cargar la base de datos
 bin/rails db:create
 bin/rails db:migrate
 bin/rails db:seed
-```
-Instalar dependencias
-```
-bundle install
-npm install
 ```
 
 Arrancar la aplicacion
