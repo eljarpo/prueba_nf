@@ -24,19 +24,18 @@ class Device < ApplicationRecord
   enum :status, [ :working, :broken, :maintenance ]
   enum :device_type, [ :printer, :pos, :monitor, :network, :computer ]
 
-  def create_device_update(device_params, message = nil)
-    if device_params[:status] == "maintenance"
+  def create_device_update(status, message = nil)
+    if status == "maintenance"
       message = message.nil? ? "Entro a mantenimeinto" : message
-    elsif device_params[:status] == "working"
+    elsif status == "working"
       message = message.nil? ? "Esta funcionando" : message
-    elsif device_params[:status] == "broken"
+    elsif status == "broken"
       message = message.nil? ? "No esta funcionando" : message
     end
     DeviceUpdate.create(device_id: self.id, message: message)
   end
 
-  def self.validate_status(params)
-    status = params[:status]
+  def self.validate_status(status)
     Device.statuses.keys.include?(status)
   end
 end
