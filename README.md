@@ -187,21 +187,25 @@ device: {
     status: string
 }
 ```
+El script cuenta con tres tareas para poder visualizar la actualizacion de los datos en especifico. Se creara una actualizacion de dispositivo cada **1 segundo** de forma aleatoria, a menos que se tenga un restaurante/dispositivo seleccionado.
 
+#### Total de restaurantes
 Este script simulara el envio de estado de los dispositivos cada 1 segundo eligiendo aleatoriamente el dispositivo y el estado.
 
 Para correr el script utilizar este comando en la carpeta raiz de la aplicacion:
 ```
-rake simulator:run
+rake 'simulator:run'
 ```
 
 
+#### Restaurante en especifico
 Con este comando puedes simular el funcionamiento de un restaurant en especifico, cambia 1 por el id del restaurante.
 ```
 rake 'simulator:restaurant[1]'
 ```
 
 
+#### Dispositivo en especifico
 Con este comando puedes simular el funcionamiento de un dispositivo en especifico, cambia '1' por el id del dispositivo.
 ```
 rake 'simulator:device[1]'
