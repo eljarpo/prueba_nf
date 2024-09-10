@@ -103,7 +103,7 @@ Vista del restaurante mostrando cada dispositivo, su estado y la fecha de la ult
 Vista del dispositivo mostrando un listado de sus ultimas actualizaciones y su fecha correspondiente, esta se actualiza automaticamente despues de cada actualizacion del dispositivo.
 
 ### POST api/v1/devices
- Recibe el estado de un dispositivo y crea un registro en la base de datos
+ Recibe el estado de un dispositivo y añade a la fila de tareas una actualizacion del registro, una vez actualizado el estado se crea un registro de la actualizacion en la base de datos.
 
 ejemplo:
 ```
