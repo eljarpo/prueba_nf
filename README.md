@@ -7,9 +7,9 @@ Aplicacion web que monitorea el estado de los dispositivos usados en cada restau
 
 #### Diagrama de BD
 ![class_diagram](./doc/images/db_diagram.png)
-
+#### Diagrama de secuencia
+![class_diagram](./doc/images/secuencia.drawio.png)
 #### Diagrama de flujo
-![class_diagram](./doc/images/flow_diagram.png)
 ![class_diagram](./doc/images/flow_chart.png)
 
 #### Clases
