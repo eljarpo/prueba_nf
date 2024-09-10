@@ -12,10 +12,13 @@ module Api
         if device.nil?
           render json: { message: "No existe ese dispositivo!" }
         else
-          if Device.validate_status(device_params) && device.update!(device_params)
-            device.create_device_update(device_params, params[:message])
-            # TODO SIDEKIQ JOB
-            # DeviceUpdateJob.perform_later(device_params, params[:message])
+          if Device.validate_status(device_params[:status]) && device.update!(device_params)
+
+            # SIN SIDEKIQ
+            # device.create_device_update(device_params[:status], params[:message])
+            # CON SIDEKIQ
+            DeviceUpdateJob.perform_async(device_params[:id], device_params[:status], params[:message])
+
             render json: { message: "#{device.name} actualizado a #{device.status}" }
           else
             render json: { message: "Error al actualizar el dispositivo" }
